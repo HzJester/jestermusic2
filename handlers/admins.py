@@ -11,23 +11,23 @@ from helpers.filters import command, other_filters
 from callsmusic import callsmusic
 
 
-@Client.on_message(command(["pause", "jeda"]) & other_filters)
+@Client.on_message(command(["durdur@jestermusicbot", "durdur"]) & other_filters)
 @errors
 @authorized_users_only
 async def pause(_, message: Message):
     callsmusic.pytgcalls.pause_stream(message.chat.id)
-    await message.reply_text("⏸ Music Paused.")
+    await message.reply_text("⏸ **Müzik Duraklatıldı**.")
 
 
-@Client.on_message(command(["resume", "lanjut"]) & other_filters)
+@Client.on_message(command(["devam@jestermusicbot", "devam"]) & other_filters)
 @errors
 @authorized_users_only
 async def resume(_, message: Message):
     callsmusic.pytgcalls.resume_stream(message.chat.id)
-    await message.reply_text("▶️ Music Resumed.")
+    await message.reply_text("▶️**Müzik Devam Ettirildi.**")
 
 
-@Client.on_message(command(["end", "stop"]) & other_filters)
+@Client.on_message(command(["durdur@jestermusicbot", "durdur"]) & other_filters)
 @errors
 @authorized_users_only
 async def stop(_, message: Message):
@@ -37,17 +37,17 @@ async def stop(_, message: Message):
        pass
 
     callsmusic.pytgcalls.leave_group_call(message.chat.id)
-    await message.reply_text("❌ **Stop the Song!**")
+    await message.reply_text("❌ **Şarkı Durduruldu!**")
 
 
-@Client.on_message(command("skip") & other_filters)
+@Client.on_message(command(["atla", "atla@jestermusicbot"]) & other_filters)
 @errors
 @authorized_users_only
 async def skip(_, message: Message):
     global que
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ Nothing is playing to skip!")
+        await message.reply_text("❗ **Hiçbir şey atlamak için çalmıyor**!")
     else:
         callsmusic.queues.task_done(chat_id)
 
@@ -63,10 +63,10 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"- Skipped **{skip[0]}**\n- Now Playing **{qeue[0][0]}**")
+    await message.reply_text(f"- Atlandı **{skip[0]}**\n- Şuanda oynatılıyor **{qeue[0][0]**")
 
 
-@Client.on_message(filters.command("reload"))
+@Client.on_message(command(["yenile", "yenile@jestermusicbot"]) & other_filters)
 @errors
 @authorized_users_only
 async def admincache(client, message: Message):
@@ -80,4 +80,4 @@ async def admincache(client, message: Message):
         ),
     )
 
-    await message.reply_text("✅️ **Admin List** is **updated**")
+    await message.reply_text("✅️ **Yönetici Listesi Güncellendi**")
