@@ -127,11 +127,11 @@ async def hfmm(_, message):
             f"Müzik Çalar Kullanıcılar İçin Başarıyla aktive edildi {message.chat.id}"
         )
 
-    elif status == "OFF" or status == "off" or status == "Off":
-        lel = await message.reply("`Processing...`")
+    elif status == "KAPA" or status == "kapa" or status == "Kapa":
+        lel = await message.reply("`İşleniyor...`")
         
         if message.chat.id in DISABLED_GROUPS:
-            await lel.edit("Music Player Already turned off In This Chat")
+            await lel.edit("Müzik Çalar Bu Sohbette Zaten Kapalı")
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
@@ -139,7 +139,7 @@ async def hfmm(_, message):
         )
     else:
         await message.reply_text(
-            "I only recognize `/musicplayer on` and /musicplayer `off only`"
+            "Yalnızca `/muzikcalar aç` ve /muzikçalar `kapa'yı tanıyorum`"
         )
 
 @Client.on_callback_query(filters.regex(pattern=r"^(cls)$"))
@@ -156,13 +156,13 @@ async def m_cb(b, cb):
         await cb.message.delete()
 
 # play
-@Client.on_message(command("play") & filters.group & ~filters.edited & ~filters.forwarded & ~filters.via_bot)
+@Client.on_message(command("oynat") & filters.group & ~filters.edited & ~filters.forwarded & ~filters.via_bot)
 async def play(_, message: Message):
     global que
     global useer
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔄 **Processing...**")
+    lel = await message.reply("🔄 **İşleniyor...**")
     
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
