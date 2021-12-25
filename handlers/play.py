@@ -170,7 +170,7 @@ async def play(_, message: Message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "@OdaHelper"
+        user.first_name = "@jesterasistan"
     usar = user
     wew = usar.id
     try:
@@ -179,36 +179,36 @@ async def play(_, message: Message):
         for administrator in administrators:
             if administrator == message.from_user.id:
                 await lel.edit(
-                        "<b>Remember to add helper to your channel</b>",
+                        "<b>Kanalınıza @jesterasistan 'ı eklemeyi unutmayın</b>",
                     )
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>Add me as admin of yor group first</b>",
+                        "<b>Önce beni grubun yöneticisi olarak ekle</b>",
                     )
                     return
 
                 try:
                     await USER.join_chat(invitelink)
                     await USER.send_message(
-                        message.chat.id, "Oda joined this group for playing music in VC"
+                        message.chat.id, "jesterasistan bu gruba VC'de müzik çalmak için katıldı"
                     )
                     await lel.edit(
-                        "<b>Oda Assistent joined this chat</b>",
+                        "<b>Jester Asistan bu sohbete katıldı</b>",
                     )
                     
                 except UserAlreadyParticipant:
                     pass
                 except Exception:
                     await lel.edit(
-                        f"<b>🛑 Flood Wait Error 🛑</b> \n\Hey {user.first_name}, assistant userbot couldn't join your group due to heavy join requests. Make sure userbot is not banned in group and try again later!")
+                        f"<b>🛑 Flood Wait Error 🛑</b> \n\Merhaba {user.first_name}, userbot yardımcısı, yoğun katılım istekleri nedeniyle grubunuza katılamadı. Userbot'un grupta yasaklanmadığından emin olun ve daha sonra tekrar deneyin!")
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i>Hey {user.first_name}, assistant userbot is not in this chat, ask admin to send /play command for first time to add it.</i>")
+            f"<i>Merhaba {user.first_name}, userbot yardımcısı bu sohbette değil, eklemek için yöneticiden ilk kez /oynat komutunu göndermesini isteyin.</i>")
         return
     
     audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
@@ -217,12 +217,12 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"❌ {DURATION_LIMIT} dakikadan uzun videoların oynatılmasına izin verilmez!"
             )
 
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+        thumb_name = "https://telegra.ph/Zmonios-12-25"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -231,7 +231,7 @@ async def play(_, message: Message):
             [
                 [
                     InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("📡 Updates", url=f"t.me/ZmoniosBots"),
                 ],
                 [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
             ]
@@ -267,15 +267,15 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/OdaSupport"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("🚨 Support", url=f"t.me/Zmonios"),
+                    InlineKeyboardButton("📡 updates", url=f"t.me/zmoniosbots"),
                 ],
                 [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
             ]
         )
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+            thumb_name = "https://telegra.ph/Zmonios-12-25"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
@@ -289,18 +289,18 @@ async def play(_, message: Message):
                     ]
                 )
         if (dur / 60) > DURATION_LIMIT:
-             await lel.edit(f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!")
+             await lel.edit(f"❌ {DURATION_LIMIT} dakikadan uzun videoların oynatılmasına izin verilmez!")
              return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)     
         file_path = await converter.convert(youtube.download(url))
     else:
         if len(message.command) < 2:
-            return await lel.edit("🧐 **What's the song you want to play?**")
-        await lel.edit("🔎 **Finding the song...**")
+            return await lel.edit("🧐 **çalmak istediğin şarkı ne?**")
+        await lel.edit("🔎 **Şarkı Bulunuyor...**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("🎵 **Processing sounds...**")
+        await lel.edit("🎵 **Sesler işleniyor...**")
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -323,7 +323,7 @@ async def play(_, message: Message):
                 
         except Exception as e:
             await lel.edit(
-                "❌ Song not found.\n\nTry another song or maybe spell it properly."
+                "❌ Şarkı bulunamadı.\in\Başka bir şarkı deneyin veya doğru heceleyin."
             )
             print(str(e))
             return
@@ -331,15 +331,15 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/OdaSupport"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("🚨 Support", url=f"t.me/Zmonios"),
+                    InlineKeyboardButton("📡 Updates", url=f"t.me/zmoniosbots"),
                 ],
                 [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
             ]
         )
         
         if (dur / 60) > DURATION_LIMIT:
-             await lel.edit(f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!")
+             await lel.edit(f"❌ {DURATION_LIMIT} dakikadan uzun videoların oynatılmasına izin verilmez!")
              return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)  
@@ -349,7 +349,7 @@ async def play(_, message: Message):
         position = await queues.put(message.chat.id, file=file_path)
         await message.reply_photo(
         photo="final.png", 
-        caption="**🎵 Song:** {}\n**🕒 Duration:** {} min\n**👤 Added By:** {}\n\n**#⃣ Queued Position:** {}".format(
+        caption="**🎵 Şarkı:** {}\n**🕒 Süre:** {} min\n**👤 Ekleyen:** {}\n\n**#⃣ Sıra:** {}".format(
         title, duration, message.from_user.mention(), position,
         ),
         reply_markup=keyboard)
@@ -360,7 +360,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="final.png",
         reply_markup=keyboard,
-        caption="**🎵 Song:** {}\n**🕒 Duration:** {} min\n**👤 Added By:** {}\n\n**▶️ Now Playing at `{}`...**".format(
+        caption="**🎵 Şarkı:** {}\n**🕒 Süre:** {} min\n**👤 Ekleyen:** {}\n\n**▶️ Şu anda `{}`  oynatılıyor...**".format(
         title, duration, message.from_user.mention(), message.chat.title
         ), )
         os.remove("final.png")
