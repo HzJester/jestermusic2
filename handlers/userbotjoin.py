@@ -7,7 +7,7 @@ from helpers.decorators import authorized_users_only, errors
 from callsmusic.callsmusic import client as USER
 from config import SUDO_USERS
 
-@Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
+@Client.on_message(filters.command(["katil","katil@jestermusicbot"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
 @errors
 async def addchannel(client, message):
@@ -16,42 +16,44 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Add me admin first</b>",
+            "<b>önce beni admin olarak ekle</b>",
         )
         return
 
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "@OdaHelper"
+        user.first_name = "@jesterasistan"
 
     try:
         await USER.join_chat(invitelink)
     except UserAlreadyParticipant:
         await message.reply_text(
-            f"<b>{user.first_name} Allready join this Group</b>",
+            f"<b>{user.first_name} Bu Gruba şimdiden katılır</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>Flood Wait Error\n{user.first_name} can't join your group due to many join requests for userbot! Make sure the user is not banned in the group."
-            "\n\nOr manually add the Assistant bot to your Group and try again.</b>",
+            f"<b>Flood Wait Error\n{user.first_name}, userbot için çok sayıda katılma isteği nedeniyle grubunuza katılamıyor! Kullanıcının grupta yasaklanmadığından emin olun."
+            "\n\nVeya Asistan botunu Grubunuza manuel olarak ekleyin ve tekrar deneyin.</b>",
         )
+
         return
     await message.reply_text(
-        f"<b>{user.first_name} Join Seccsesfully</b>",
+        f"<b>{user.first_name} Başarıyla Katıldı
+</b>",
     )
 
 
-@USER.on_message(filters.group & filters.command(["userbotleave"]))
+@USER.on_message(filters.group & filters.command (["ayril","ayril@jestermusicbot"]))
 @authorized_users_only
 async def rem(USER, message):
     try:
         await USER.leave_chat(message.chat.id)
     except:
         await message.reply_text(
-            f"<b>Users cannot leave your group! Probably waiting for floodwaits."
-            "\n\nOr manually remove me from your Group</b>",
+            f"<b>Kullanıcılar grubunuzdan ayrılamaz! Muhtemelen sel bekliyor."
+            "\n\nYa da beni Grubunuzdan manuel olarak çıkarın</b>",
         )
         return
     
@@ -75,7 +77,7 @@ async def bye(client, message):
     await client.send_message(message.chat.id, f"Left {left} chats. Failed {failed} chats.")
     
     
-@Client.on_message(filters.command(["userbotjoinchannel","ubjoinc"]) & ~filters.private & ~filters.bot)
+@Client.on_message(filters.command(["katilkanal","katilkanal@jestermusicbot"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
 @errors
 async def addcchannel(client, message):
@@ -84,36 +86,36 @@ async def addcchannel(client, message):
       conid = conchat.linked_chat.id
       chid = conid
     except:
-      await message.reply("Are your connected?")
+      await message.reply("bağlı mısın?")
       return    
     chat_id = chid
     try:
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Add me Admin first</b>",
+            "<b>Önce beni Admin olarak ekle</b>",
         )
         return
 
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "@OdaHelper"
+        user.first_name = "@jesterasistan"
 
     try:
         await USER.join_chat(invitelink)
     except UserAlreadyParticipant:
         await message.reply_text(
-            f"<b>{user.first_name} Already in your channel</b>",
+            f"<b>{user.first_name} zaten kanalınızda</b>",
         )
         return
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>Flood Wait Error\n{user.first_name} can't join your group due to many join requests for userbot! Make sure the user is not banned in the group."
-            "\n\nOr manually add the Assistant bot to your Group and try again.</b>",
+            f"<b>Flood Wait Error\n{user.first_name} userbot için çok sayıda katılma isteği nedeniyle grubunuza katılamıyor! Kullanıcının grupta yasaklanmadığından emin olun."
+            "\n\nYa da Asistan botunu Grubunuza manuel olarak ekleyin ve tekrar deneyin.</b>",
         )
         return
     await message.reply_text(
-        f"<b>{user.first_name} sudah bergabung dengan obrolan Anda</b>",
+        f"<b>{user.first_name} sohbetinize zaten katıldı</b>",
     )
