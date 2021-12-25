@@ -15,11 +15,11 @@ from helpers.errors import DurationLimitError
 from helpers.gets import get_url, get_file_name
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-@Client.on_message(command("stream") & other_filters)
+@Client.on_message(command("yurut") & other_filters)
 @errors
 async def stream(_, message: Message):
 
-    lel = await message.reply("🔁 **𝐩𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠** 𝐬𝐨𝐮𝐧𝐝...")
+    lel = await message.reply("🔁 **Ses İşleniyor**...")
     sender_id = message.from_user.id
     sender_name = message.from_user.first_name
 
@@ -28,7 +28,7 @@ async def stream(_, message: Message):
                 [
                     InlineKeyboardButton(
                         text="✨ ɢʀᴏᴜᴘ",
-                        url=f"https://t.me/Oda"),
+                        url=f"https://t.me/zmonios"),
                     InlineKeyboardButton(
                         text="🌻 ᴄʜᴀɴɴᴇʟ",
                         url=f"https://t.me/{UPDATES_CHANNEL}")
@@ -42,7 +42,7 @@ async def stream(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"𝐗 𝐕𝐢𝐝𝐞𝐨𝐬 𝐥𝐨𝐧𝐠𝐞𝐫 𝐭𝐡𝐚𝐧 {DURATION_LIMIT} 𝐦𝐢𝐧𝐮𝐭𝐞(𝐬) 𝐚𝐫𝐞𝐧'𝐭 𝐚𝐥𝐥𝐨𝐰𝐞𝐝 𝐭𝐨 𝐩𝐥𝐚𝐲!"
+                f"Video çok uzun ,{DURATION_LIMIT} dakikadan daha uzun oynatılamaz "
             )
 
         file_name = get_file_name(audio)
