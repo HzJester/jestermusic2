@@ -63,7 +63,7 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"- Atlandı **{skip[0]}**\n- Şuanda oynatılıyor **{qeue[0][0]**")
+    await message.reply_text(f"- Atlandı **{skip[0]}**\n- Şuanda oynatılıyor **{qeue[0][0]}**")
 
 
 @Client.on_message(command(["yenile", "yenile@jestermusicbot"]) & other_filters)
