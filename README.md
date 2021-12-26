@@ -31,7 +31,7 @@
 
 ### Deploy To Heroku</h4>
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/UserLazy/LazyMusicbot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Hzjester/jestermusic2)
 
 Use [Repl Link](http://string.projectdils.repl.run) to get pyrogram string session
 
