@@ -135,7 +135,7 @@ async def hfmm(_, message):
             return
         DISABLED_GROUPS.append(message.chat.id)
         await lel.edit(
-            f"Müzik Çalar Kullanıcılar İçin Başarıyla aktive edildi {message.chat.id}
+            f"Müzik Çalar Kullanıcılar İçin Başarıyla aktive edildi {message.chat.id}"
         )
     else:
         await message.reply_text(
